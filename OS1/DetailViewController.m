@@ -19,7 +19,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self reloadData];
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,15 +38,15 @@
         return;
     }
     self.navigationItem.title = _detail.title;
-    
     self.titleLabel.text = _detail.title;
     self.imageView.image = [UIImage imageNamed:_detail.imageName];
     self.textView.text = _detail.text;
     
-    CGRect contentViewFrame = _contentView.frame;
-    contentViewFrame.size.height +=_textView.contentSize.height - _textView.frame.size.height;
-    _contentView.frame = contentViewFrame;
-    _scrollView.contentSize = _contentView.frame.size;
+    //Устанавливаем новый размер области скрола
+    //ширина такая же как и размер ScrollView
+    //высота - положение view с текстом (self.textView.frame.origin.y) + его высота (высоту текста у textView можно взять черз textView.contentSize.height)
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width,self.textView.contentSize.height+self.textView.frame.origin.y);
+
 }
 
 
